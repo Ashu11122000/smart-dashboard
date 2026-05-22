@@ -1,9 +1,16 @@
+// Import Navbar
 import Navbar from './components/layout/Navbar';
+
+// Import reusable Card
 import Card from './components/common/Card';
+
+// Import modules
 import Counter from './components/counter/Counter';
 import UserForm from './components/form/UserForm';
 import TodoList from './components/todo/TodoList';
+import DebouncedSearch from "./components/search/DebounceSearch";
 
+// Main app
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -25,6 +32,10 @@ export default function App() {
 
           <Card title="Todo Module">
             <TodoList />
+          </Card>
+
+          <Card title="Debounced Search Module">
+            <DebouncedSearch />
           </Card>
         </div>
       </main>
