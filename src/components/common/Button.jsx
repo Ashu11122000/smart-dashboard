@@ -1,8 +1,15 @@
-export default function Button({ children, onClick, className }) {
+// Reusable button component
+export default function Button({
+    children,
+    onClick,
+    type = 'button',
+    className = '',
+}) {
     return (
         <button
+            type={type}
             onClick={onClick}
-            className={`text-white px-4 py-2 rounded-lg ${className}`}
+            className={`bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition ${className}`}
         >
             {children}
         </button>
