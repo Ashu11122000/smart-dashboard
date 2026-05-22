@@ -1,7 +1,13 @@
+/* Import Tailwind base styles */
 @tailwind base;
+
+/* Import Tailwind component styles */
 @tailwind components;
+
+/* Import Tailwind utility classes */
 @tailwind utilities;
 
+/* Body styling */
 body {
   margin: 0;
   min-width: 320px;
