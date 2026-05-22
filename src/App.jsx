@@ -1,38 +1,41 @@
 // Import Navbar component
-import Navbar from './components/layout/Navbar.jsx';
+import Navbar from './components/layout/Navbar';
 
 // Import reusable Card component
-import Card from './components/common/Card.jsx';
+import Card from './components/common/Card';
 
-// Main application component
+// Import Counter component
+import Counter from './components/counter/Counter';
+
+// Main App component
 export default function App() {
 
-  // Return UI structure
+  // Return application UI
   return (
 
-    // Main app container with full screen height and background color
+    // Full app wrapper
     <div className="min-h-screen bg-gray-100">
 
-      {/* Navbar at top */}
+      {/* Top navigation */}
       <Navbar />
 
-      {/* Main content wrapper */}
+      {/* Main content area */}
       <main className="p-6">
 
-        {/* Dashboard title */}
+        {/* Dashboard heading */}
         <h1 className="text-3xl font-bold mb-6">
           Smart Dashboard
         </h1>
 
-        {/* Grid layout for dashboard cards */}
+        {/* Responsive dashboard grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          {/* Counter placeholder */}
+          {/* Counter module */}
           <Card title="Counter Module">
-            Coming in Phase 2
+            <Counter />
           </Card>
 
-          {/* Form placeholder */}
+          {/* User form placeholder */}
           <Card title="User Form Module">
             Coming in Phase 3
           </Card>
