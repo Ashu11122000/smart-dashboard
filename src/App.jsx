@@ -8,7 +8,8 @@ import Card from './components/common/Card';
 import Counter from './components/counter/Counter';
 import UserForm from './components/form/UserForm';
 import TodoList from './components/todo/TodoList';
-import DebouncedSearch from "./components/search/DebounceSearch";
+import DebouncedSearch from './components/search/DebounceSearch';
+import Calculator from './components/calculator/Calculator';
 
 // Main app
 export default function App() {
@@ -36,6 +37,10 @@ export default function App() {
 
           <Card title="Debounced Search Module">
             <DebouncedSearch />
+          </Card>
+
+          <Card title="Calculator Module">
+            <Calculator />
           </Card>
         </div>
       </main>
