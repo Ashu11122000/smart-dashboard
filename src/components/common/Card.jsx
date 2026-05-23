@@ -1,22 +1,25 @@
-// Reusable Card component receives title and children props
 export default function Card({ title, children }) {
-
-    // Return card UI
     return (
-
-        // Card outer container
-        <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-
-            {/* Card title */}
-            <h3 className="text-xl font-semibold mb-4">
+        <div
+            className="
+                bg-white
+                rounded-2xl
+                shadow-md
+                hover:shadow-2xl
+                hover:-translate-y-2
+                transition-all
+                duration-300
+                p-4 sm:p-6
+                border border-gray-100
+            "
+        >
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
                 {title}
             </h3>
 
-            {/* Card content */}
             <div className="text-gray-600">
                 {children}
             </div>
-
         </div>
     );
 }

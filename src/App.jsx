@@ -7,22 +7,22 @@ import TodoList from "./components/todo/TodoList";
 import DebouncedSearch from "./components/search/DebounceSearch";
 import Calculator from "./components/calculator/Calculator";
 import Weather from "./components/weather/Weather";
-import NoteApp from "./components/notes/NoteApp";
+import NotesApp from "./components/notes/NotesApp";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-50">
       <Navbar />
 
-      <main className="p-6">
-        <h1 className="text-3xl font-bold mb-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-gray-800">
           Smart Dashboard
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           <Card title="Counter Module">
             <Counter />
           </Card>
@@ -48,12 +48,11 @@ export default function App() {
           </Card>
 
           <Card title="Notes Module">
-            <NoteApp />
+            <NotesApp />
           </Card>
         </div>
       </main>
 
-      {/* Global Toast Notifications */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
