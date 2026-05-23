@@ -7,7 +7,7 @@ import TodoList from "./components/todo/TodoList";
 import DebouncedSearch from "./components/search/DebounceSearch";
 import Calculator from "./components/calculator/Calculator";
 import Weather from "./components/weather/Weather";
-import NotesApp from "./components/notes/NotesApp";
+import NoteApp from "./components/notes/NoteApp";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -48,7 +48,7 @@ export default function App() {
           </Card>
 
           <Card title="Notes Module">
-            <NotesApp />
+            <NoteApp />
           </Card>
         </div>
       </main>
