@@ -9,6 +9,9 @@ import Calculator from "./components/calculator/Calculator";
 import Weather from "./components/weather/Weather";
 import NoteApp from "./components/notes/NoteApp";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -49,6 +52,20 @@ export default function App() {
           </Card>
         </div>
       </main>
+
+      {/* Global Toast Notifications */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

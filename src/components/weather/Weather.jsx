@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Card from "../common/Card";
 import Button from "../common/Button";
 import Loader from "../common/Loader";
@@ -13,6 +14,7 @@ export default function Weather() {
     async function handleSearch() {
         if (!city.trim()) {
             setError("Please enter a city name");
+            toast.warning("Please enter a city name");
             setWeather(null);
             return;
         }
@@ -24,17 +26,23 @@ export default function Weather() {
 
             const data = await fetchWeather(city);
             setWeather(data);
+
+            toast.success("Weather data fetched successfully!");
         } catch (err) {
             console.log(err.response?.data || err.message);
 
             if (err.response?.status === 401) {
                 setError("Invalid API key");
+                toast.error("Invalid API key");
             } else if (err.response?.status === 400) {
                 setError("City not found");
+                toast.error("City not found");
             } else if (err.message === "Missing API key") {
                 setError("Weather API key missing");
+                toast.error("Weather API key missing");
             } else {
                 setError("Something went wrong");
+                toast.error("Failed to fetch weather data");
             }
         } finally {
             setLoading(false);
@@ -69,28 +77,28 @@ export default function Weather() {
             )}
 
             {weather && (
-            <div className="space-y-2 text-gray-800">
-                <p>
-                    <strong>City:</strong> {weather.location.name}, {weather.location.country}
-                </p>
+                <div className="space-y-2 text-gray-800">
+                    <p>
+                        <strong>City:</strong> {weather.location.name}, {weather.location.country}
+                    </p>
 
-                <p>
-                    <strong>Temperature:</strong> {weather.current.temp_c}°C
-                </p>
+                    <p>
+                        <strong>Temperature:</strong> {weather.current.temp_c}°C
+                    </p>
 
-                <p>
-                    <strong>Condition:</strong> {weather.current.condition.text}
-                </p>
+                    <p>
+                        <strong>Condition:</strong> {weather.current.condition.text}
+                    </p>
 
-                <p>
-                    <strong>Humidity:</strong> {weather.current.humidity}%
-                </p>
+                    <p>
+                        <strong>Humidity:</strong> {weather.current.humidity}%
+                    </p>
 
-                <p>
-                    <strong>Wind Speed:</strong> {weather.current.wind_kph} kph
-                </p>
-            </div>
-        )}
-    </Card>
+                    <p>
+                        <strong>Wind Speed:</strong> {weather.current.wind_kph} kph
+                    </p>
+                </div>
+            )}
+        </Card>
     );
 }

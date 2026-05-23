@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import NoteForm from "./NoteForm";
 import NoteList from "./NoteList";
 
@@ -16,16 +17,18 @@ export default function NotesApp() {
 
     function addNote(note) {
         setNotes((prev) => [note, ...prev]);
+        toast.success("Note added successfully!");
     }
 
     function deleteNote(id) {
         setNotes((prev) => prev.filter((note) => note.id !== id));
+        toast.error("Note deleted");
     }
 
     const filteredNotes = notes.filter(
         (note) =>
             note.title.toLowerCase().includes(search.toLowerCase()) ||
-        note.content.toLowerCase().includes(search.toLowerCase())
+            note.content.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
