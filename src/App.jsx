@@ -10,6 +10,7 @@ import UserForm from './components/form/UserForm';
 import TodoList from './components/todo/TodoList';
 import DebouncedSearch from './components/search/DebounceSearch';
 import Calculator from './components/calculator/Calculator';
+import Weather from './components/weather/Weather';
 
 // Main app
 export default function App() {
@@ -41,6 +42,10 @@ export default function App() {
 
           <Card title="Calculator Module">
             <Calculator />
+          </Card>
+
+          <Card title="Weather Module">
+            <Weather />
           </Card>
         </div>
       </main>
