@@ -1,18 +1,14 @@
-// Import Navbar
-import Navbar from './components/layout/Navbar';
+import Navbar from "./components/layout/Navbar";
+import Card from "./components/common/Card";
 
-// Import reusable Card
-import Card from './components/common/Card';
+import Counter from "./components/counter/Counter";
+import UserForm from "./components/form/UserForm";
+import TodoList from "./components/todo/TodoList";
+import DebouncedSearch from "./components/search/DebounceSearch";
+import Calculator from "./components/calculator/Calculator";
+import Weather from "./components/weather/Weather";
+import NoteApp from "./components/notes/NoteApp";
 
-// Import modules
-import Counter from './components/counter/Counter';
-import UserForm from './components/form/UserForm';
-import TodoList from './components/todo/TodoList';
-import DebouncedSearch from './components/search/DebounceSearch';
-import Calculator from './components/calculator/Calculator';
-import Weather from './components/weather/Weather';
-
-// Main app
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -46,6 +42,10 @@ export default function App() {
 
           <Card title="Weather Module">
             <Weather />
+          </Card>
+
+          <Card title="Notes Module">
+            <NoteApp />
           </Card>
         </div>
       </main>
