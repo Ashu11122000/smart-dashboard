@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Card from "../common/Card";
 import Button from "../common/Button";
 import { calculate } from "../../utils/calculatorHelpers";
@@ -15,7 +16,12 @@ export default function Calculator() {
     }
 
     function handleCalculate() {
-        setInput(calculate(input));
+        try {
+            const result = calculate(input);
+            setInput(result);
+        } catch {
+            toast.error("Invalid calculation");
+        }
     }
 
     const buttons = [
@@ -41,8 +47,8 @@ export default function Calculator() {
                     <Button
                         key={btn}
                         onClick={() =>
-                        btn === "=" ? handleCalculate() : appendValue(btn)
-                    }
+                            btn === "=" ? handleCalculate() : appendValue(btn)
+                        }
                         className="bg-blue-500 hover:bg-blue-600"
                     >
                         {btn}

@@ -1,6 +1,9 @@
 // Import React hook
 import { useState } from 'react';
 
+// Import toast
+import { toast } from 'react-toastify';
+
 // Import reusable Button
 import Button from '../common/Button';
 
@@ -34,6 +37,7 @@ export default function TodoList() {
 
     // Prevent adding empty tasks
     if (taskInput.trim() === '') {
+      toast.warning('Please enter a task first');
       return;
     }
 
@@ -46,6 +50,9 @@ export default function TodoList() {
 
     // Add new todo into array
     setTodos((prevTodos) => [...prevTodos, newTodo]);
+
+    // Success toast
+    toast.success('Task added successfully!');
 
     // Clear input field
     setTaskInput('');
@@ -71,6 +78,8 @@ export default function TodoList() {
     setTodos((prevTodos) =>
       prevTodos.filter((todo) => todo.id !== todoId)
     );
+
+    toast.error('Task deleted');
   }
 
   // Handle filter changes
@@ -83,17 +92,14 @@ export default function TodoList() {
   // Filter displayed todos
   const filteredTodos = todos.filter((todo) => {
 
-    // Show all todos
     if (filter === 'All') {
       return true;
     }
 
-    // Show only active todos
     if (filter === 'Active') {
       return !todo.completed;
     }
 
-    // Show only completed todos
     if (filter === 'Completed') {
       return todo.completed;
     }
@@ -101,16 +107,10 @@ export default function TodoList() {
     return true;
   });
 
-  // Return UI
   return (
-
-    // Main wrapper
     <div className="space-y-5">
 
-      {/* Input + button section */}
       <div className="flex gap-3">
-
-        {/* Task input */}
         <input
           type="text"
           value={taskInput}
@@ -119,30 +119,23 @@ export default function TodoList() {
           className="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-        {/* Add task button */}
         <Button onClick={handleAddTask}>
           Add Task
         </Button>
-
       </div>
 
-      {/* Filter buttons */}
       <TodoFilter
         currentFilter={filter}
         onFilterChange={handleFilterChange}
       />
 
-      {/* Todo list */}
       <div className="space-y-3">
-
-        {/* Empty state */}
         {filteredTodos.length === 0 && (
           <p className="text-gray-500">
             No tasks available.
           </p>
         )}
 
-        {/* Render todos */}
         {filteredTodos.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -151,7 +144,6 @@ export default function TodoList() {
             onDelete={handleDeleteTask}
           />
         ))}
-
       </div>
 
     </div>
