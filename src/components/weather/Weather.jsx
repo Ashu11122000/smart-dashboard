@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { fetchWeather } from "../../services/weatherApi";
+import Button from "../common/Button";
+import Loader from "../common/Loader";
 
 export default function Weather() {
   const [city, setCity] = useState("");
@@ -18,12 +20,14 @@ export default function Weather() {
     try {
       setLoading(true);
       setError("");
+
       const data = await fetchWeather(city.trim());
+
       setWeather(data);
-      toast.success("Weather updated");
+      toast.success("Weather intelligence updated");
     } catch (err) {
       if (err.response?.status === 401) {
-        setError("Invalid API key");
+        setError("Invalid weather API key");
       } else if (err.response?.status === 400) {
         setError("City not found");
       } else {
@@ -34,135 +38,226 @@ export default function Weather() {
     }
   }
 
+  const metrics = weather
+    ? [
+        {
+          label: "Humidity",
+          value: `${weather.current.humidity}%`,
+          icon: "💧",
+          accent: "blue",
+        },
+        {
+          label: "Wind",
+          value: `${weather.current.wind_kph} kph`,
+          icon: "🌬️",
+          accent: "amber",
+        },
+        {
+          label: "UV Index",
+          value: weather.current.uv,
+          icon: "☀️",
+          accent: "violet",
+        },
+        {
+          label: "Pressure",
+          value: `${weather.current.pressure_mb} mb`,
+          icon: "🌡️",
+          accent: "emerald",
+        },
+      ]
+    : [];
+
+  const accentStyles = {
+    blue: "text-blue-400 border-blue-400/10",
+    amber: "text-amber-400 border-amber-400/10",
+    violet: "text-violet-400 border-violet-400/10",
+    emerald: "text-emerald-400 border-emerald-400/10",
+  };
+
   return (
-    <div className="relative overflow-hidden rounded-3xl p-6 text-white">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 rounded-3xl" />
-      <div className="absolute top-0 left-10 h-40 w-40 bg-cyan-500/20 blur-3xl rounded-full -z-10" />
-      <div className="absolute bottom-0 right-10 h-48 w-48 bg-purple-500/20 blur-3xl rounded-full -z-10" />
+    <div className="relative overflow-hidden rounded-3xl border border-blue-400/10 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-6 shadow-2xl backdrop-blur-2xl text-white">
 
-      {/* Header */}
-      <div className="mb-6">
-        <p className="text-cyan-300 text-xs uppercase tracking-[0.3em] font-semibold">
-          Live Weather Intelligence
-        </p>
+      {/* Ambient Glow */}
+      <div className="absolute -top-16 -left-16 h-56 w-56 rounded-full bg-blue-500/15 blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-violet-500/15 blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/5 blur-3xl"></div>
 
-        <h2 className="text-4xl font-black mt-3 leading-tight">
-          Atmospheric Dashboard
-        </h2>
+      <div className="relative z-10 space-y-6">
 
-        <p className="text-slate-300 mt-2">
-          Real-time climate insights with premium visualization
-        </p>
-      </div>
+        {/* Header */}
+        <div>
+          <p className="text-xs uppercase tracking-[0.35em] text-blue-100/50">
+            Live Weather Intelligence
+          </p>
 
-      {/* Search */}
-      <div className="mb-6 flex items-center rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 p-2 shadow-xl">
-        <input
-          type="text"
-          placeholder="Search city..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          className="flex-1 bg-transparent px-4 py-3 text-white placeholder:text-slate-400 outline-none"
-        />
+          <h2 className="text-4xl font-black bg-gradient-to-r from-white via-blue-200 to-amber-300 bg-clip-text text-transparent mt-3">
+            Atmospheric Dashboard
+          </h2>
 
-        <button
-          onClick={handleSearch}
-          className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold shadow-lg hover:scale-105 transition"
-        >
-          Search
-        </button>
-      </div>
-
-      {/* Error */}
-      {error && (
-        <div className="mb-6 rounded-2xl bg-red-500/20 border border-red-500/30 p-4">
-          {error}
-        </div>
-      )}
-
-      {/* Loading */}
-      {loading && (
-        <div className="py-12 text-center text-cyan-300 animate-pulse text-lg">
-          Loading weather...
-        </div>
-      )}
-
-      {/* Empty */}
-      {!weather && !loading && !error && (
-        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 text-center shadow-2xl">
-          <div className="text-7xl mb-4">🌤️</div>
-          <h3 className="text-2xl font-bold">Search Weather Anywhere</h3>
-          <p className="text-slate-300 mt-2">
-            Enter any city to unlock premium climate analytics
+          <p className="text-blue-100/60 mt-2">
+            Real-time climate intelligence with premium visualization
           </p>
         </div>
-      )}
 
-      {/* Weather Data */}
-      {weather && !loading && (
-        <div className="space-y-6">
-          {/* Main Hero */}
-          <div className="rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/10 p-6 shadow-2xl">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-slate-400 text-sm uppercase tracking-wider">
-                  Current Weather
-                </p>
+        {/* Search */}
+        <div className="rounded-3xl border border-blue-400/10 bg-white/5 backdrop-blur-xl p-3 shadow-xl">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="Search any city..."
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              className="
+                flex-1
+                rounded-2xl
+                border border-blue-400/10
+                bg-black/10
+                px-5
+                py-4
+                text-white
+                placeholder:text-blue-100/35
+                outline-none
+                transition-all
+                focus:border-amber-400/30
+                focus:ring-2
+                focus:ring-amber-400/20
+              "
+            />
 
-                <h3 className="text-3xl font-bold mt-2">
-                  {weather.location.name}
-                </h3>
-
-                <p className="text-slate-300">{weather.location.country}</p>
-              </div>
-
-              <img
-                src={`https:${weather.current.condition.icon}`}
-                alt=""
-                className="w-20 h-20"
-              />
-            </div>
-
-            <div className="mt-6 flex justify-between items-end">
-              <div>
-                <p className="text-6xl font-black">{weather.current.temp_c}°</p>
-
-                <p className="text-cyan-300 mt-2">
-                  {weather.current.condition.text}
-                </p>
-              </div>
-
-              <div className="text-right">
-                <p className="text-slate-400">Feels Like</p>
-                <p className="text-2xl font-bold">
-                  {weather.current.feelslike_c}°
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Metrics */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              ["Humidity", `${weather.current.humidity}%`, "💧"],
-              ["Wind", `${weather.current.wind_kph} kph`, "🌬️"],
-              ["UV Index", weather.current.uv, "☀️"],
-              ["Pressure", `${weather.current.pressure_mb} mb`, "🌡️"],
-            ].map(([label, value, icon]) => (
-              <div
-                key={label}
-                className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 p-5 shadow-lg hover:scale-105 transition"
-              >
-                <div className="text-3xl">{icon}</div>
-                <p className="text-slate-400 mt-3">{label}</p>
-                <p className="text-xl font-bold mt-1">{value}</p>
-              </div>
-            ))}
+            <Button
+              onClick={handleSearch}
+              className="
+                rounded-2xl
+                px-8
+                bg-gradient-to-r
+                from-blue-600
+                via-violet-600
+                to-amber-500
+                font-bold
+              "
+            >
+              Search
+            </Button>
           </div>
         </div>
-      )}
+
+        {/* Error */}
+        {error && (
+          <div className="rounded-3xl border border-rose-400/20 bg-rose-500/10 p-5 backdrop-blur-xl">
+            <p className="font-semibold text-rose-300">{error}</p>
+          </div>
+        )}
+
+        {/* Loading */}
+        {loading && (
+          <Loader
+            text="Fetching atmospheric intelligence..."
+            variant="primary"
+          />
+        )}
+
+        {/* Empty State */}
+        {!weather && !loading && !error && (
+          <div className="rounded-3xl border border-blue-400/10 bg-white/5 backdrop-blur-xl p-12 text-center shadow-2xl">
+            <div className="text-7xl mb-5 animate-pulse">
+              🌤️
+            </div>
+
+            <h3 className="text-3xl font-black bg-gradient-to-r from-white via-blue-200 to-amber-300 bg-clip-text text-transparent">
+              Search Weather Anywhere
+            </h3>
+
+            <p className="text-blue-100/50 mt-3 text-lg">
+              Enter any city to unlock premium climate analytics
+            </p>
+          </div>
+        )}
+
+        {/* Weather Data */}
+        {weather && !loading && (
+          <div className="space-y-6">
+
+            {/* Hero Card */}
+            <div className="rounded-3xl border border-blue-400/10 bg-white/5 backdrop-blur-2xl p-6 shadow-2xl">
+              <div className="flex flex-col md:flex-row justify-between gap-6">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-blue-100/40">
+                    Current Weather
+                  </p>
+
+                  <h3 className="text-4xl font-black mt-3">
+                    {weather.location.name}
+                  </h3>
+
+                  <p className="text-blue-100/60 mt-2">
+                    {weather.location.country}
+                  </p>
+
+                  <div className="mt-8">
+                    <p className="text-7xl font-black text-amber-400">
+                      {weather.current.temp_c}°
+                    </p>
+
+                    <p className="text-blue-300 mt-3 text-lg">
+                      {weather.current.condition.text}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center justify-center">
+                  <img
+                    src={`https:${weather.current.condition.icon}`}
+                    alt={weather.current.condition.text}
+                    className="w-28 h-28"
+                  />
+
+                  <div className="mt-4 rounded-2xl border border-violet-400/10 bg-violet-500/10 px-5 py-3">
+                    <p className="text-sm text-violet-200">
+                      Feels Like
+                    </p>
+
+                    <p className="text-2xl font-bold text-white">
+                      {weather.current.feelslike_c}°
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className={`
+                    rounded-3xl
+                    border
+                    bg-white/5
+                    backdrop-blur-xl
+                    p-5
+                    shadow-xl
+                    hover:scale-[1.03]
+                    transition-all
+                    duration-300
+                    ${accentStyles[metric.accent]}
+                  `}
+                >
+                  <div className="text-3xl">{metric.icon}</div>
+
+                  <p className="text-blue-100/40 mt-4 uppercase text-xs tracking-[0.2em]">
+                    {metric.label}
+                  </p>
+
+                  <p className="text-2xl font-black mt-2">
+                    {metric.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

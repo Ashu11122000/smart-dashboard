@@ -19,6 +19,7 @@ export default function TodoList() {
       id: Date.now(),
       text: taskInput.trim(),
       completed: false,
+      createdAt: new Date().toISOString(),
     };
 
     setTodos((prev) => [newTodo, ...prev]);
@@ -54,75 +55,85 @@ export default function TodoList() {
   const completed = todos.filter((todo) => todo.completed).length;
   const pending = total - completed;
 
+  const stats = [
+    {
+      label: "Total Tasks",
+      value: total,
+      icon: "📋",
+      accent: "blue",
+    },
+    {
+      label: "Pending",
+      value: pending,
+      icon: "⚡",
+      accent: "amber",
+    },
+    {
+      label: "Completed",
+      value: completed,
+      icon: "✅",
+      accent: "violet",
+    },
+  ];
+
+  const statColors = {
+    blue: "text-blue-400 border-blue-400/10 hover:shadow-blue-500/10",
+    amber: "text-amber-400 border-amber-400/10 hover:shadow-amber-500/10",
+    violet: "text-violet-400 border-violet-400/10 hover:shadow-violet-500/10",
+  };
+
   return (
     <div className="space-y-6">
+
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
-        {[
-          {
-            label: "Total",
-            value: total,
-            icon: "📋",
-          },
-          {
-            label: "Pending",
-            value: pending,
-            icon: "⚡",
-          },
-          {
-            label: "Done",
-            value: completed,
-            icon: "✅",
-          },
-        ].map((stat) => (
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {stats.map((stat) => (
           <div
             key={stat.label}
-            className="
+            className={`
               group
+              relative
+              overflow-hidden
               rounded-3xl
-              border border-slate-700
+              border
               bg-gradient-to-br
               from-slate-950
-              via-slate-900
-              to-slate-800
+              via-blue-950
+              to-slate-900
               p-5
               shadow-2xl
-              shadow-black/40
-              hover:scale-105
-              hover:border-cyan-400/40
-              hover:shadow-cyan-500/10
+              backdrop-blur-2xl
+              hover:scale-[1.03]
               transition-all
-              duration-300
-            "
+              duration-500
+              ${statColors[stat.accent]}
+            `}
           >
-            <div className="text-2xl">{stat.icon}</div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
+              <div className="absolute -top-10 left-0 h-32 w-32 rounded-full bg-blue-500/10 blur-3xl" />
+            </div>
 
-            <p className="text-slate-400 text-xs uppercase tracking-[0.25em] mt-4">
-              {stat.label}
-            </p>
+            <div className="relative z-10">
+              <div className="text-2xl">{stat.icon}</div>
 
-            <p className="text-3xl font-black text-white mt-2">
-              {stat.value}
-            </p>
+              <p className="text-blue-100/40 text-xs uppercase tracking-[0.25em] mt-4">
+                {stat.label}
+              </p>
+
+              <p className={`text-3xl font-black mt-2 ${statColors[stat.accent].split(" ")[0]}`}>
+                {stat.value}
+              </p>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Input Section */}
-      <div
-        className="
-          rounded-3xl
-          border border-slate-700
-          bg-gradient-to-br
-          from-slate-950
-          via-slate-900
-          to-slate-800
-          p-3
-          shadow-2xl
-          shadow-black/40
-        "
-      >
-        <div className="flex gap-3">
+      {/* Task Composer */}
+      <div className="relative overflow-hidden rounded-3xl border border-blue-400/10 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-4 shadow-2xl backdrop-blur-2xl">
+        <div className="absolute -top-10 -left-10 h-32 w-32 rounded-full bg-blue-500/10 blur-3xl"></div>
+        <div className="absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-violet-500/10 blur-3xl"></div>
+
+        <div className="relative z-10 flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             value={taskInput}
@@ -130,21 +141,22 @@ export default function TodoList() {
             onKeyDown={(e) =>
               e.key === "Enter" && handleAddTask()
             }
-            placeholder="What needs to be done?"
+            placeholder="What needs to be accomplished today?"
             className="
               flex-1
               rounded-2xl
-              border border-slate-700
-              bg-slate-950
+              border border-blue-400/10
+              bg-white/5
               px-5
               py-4
               text-white
-              placeholder:text-slate-500
+              placeholder:text-blue-100/35
               outline-none
-              focus:border-cyan-400
-              focus:ring-2
-              focus:ring-cyan-400/20
+              backdrop-blur-xl
               transition-all
+              focus:border-amber-400/30
+              focus:ring-2
+              focus:ring-amber-400/20
             "
           />
 
@@ -154,20 +166,13 @@ export default function TodoList() {
               px-8
               rounded-2xl
               bg-gradient-to-r
-              from-cyan-300
-              via-blue-500
-              to-indigo-600
-              border
-              border-cyan-300/40
+              from-blue-600
+              via-violet-600
+              to-amber-500
               text-white
               font-bold
-              shadow-2xl
-              shadow-cyan-500/30
-              hover:scale-105
-              hover:brightness-110
-              hover:shadow-cyan-400/40
-              transition-all
-              duration-300
+              hover:shadow-lg
+              hover:shadow-blue-500/20
             "
           >
             Add Task
@@ -183,31 +188,22 @@ export default function TodoList() {
 
       {/* Tasks */}
       {filteredTodos.length === 0 ? (
-        <div
-          className="
-            rounded-3xl
-            border border-slate-700
-            bg-gradient-to-br
-            from-slate-950
-            via-slate-900
-            to-slate-800
-            p-14
-            text-center
-            shadow-2xl
-            shadow-black/40
-          "
-        >
-          <div className="text-7xl mb-5 animate-pulse">
-            🚀
+        <div className="relative overflow-hidden rounded-3xl border border-blue-400/10 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-14 text-center shadow-2xl backdrop-blur-2xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-violet-500/5 to-amber-500/5"></div>
+
+          <div className="relative z-10">
+            <div className="text-7xl mb-5 animate-pulse">
+              🚀
+            </div>
+
+            <h3 className="text-3xl font-black bg-gradient-to-r from-white via-blue-200 to-amber-300 bg-clip-text text-transparent">
+              Workspace Ready
+            </h3>
+
+            <p className="text-blue-100/50 mt-3 text-lg">
+              Add tasks and build unstoppable momentum
+            </p>
           </div>
-
-          <h3 className="text-3xl font-black text-white">
-            Workspace Ready
-          </h3>
-
-          <p className="text-slate-400 mt-3 text-lg">
-            Add tasks and build momentum
-          </p>
         </div>
       ) : (
         <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
