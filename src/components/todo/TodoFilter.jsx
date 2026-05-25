@@ -1,50 +1,59 @@
 import Button from "../common/Button";
 
-export default function TodoFilter({ currentFilter, onFilterChange }) {
+export default function TodoFilter({
+  currentFilter,
+  onFilterChange,
+}) {
   const filters = [
     {
       key: "all",
       label: "All Tasks",
-      icon: "◉",
-      accent: "blue",
+      icon: "📋",
+      accent: `
+        from-zinc-600
+        via-neutral-500
+        to-stone-600
+        border-zinc-300/20
+        shadow-zinc-500/20
+      `,
     },
     {
       key: "active",
       label: "Active",
       icon: "⚡",
-      accent: "amber",
+      accent: `
+        from-amber-500
+        via-orange-500
+        to-yellow-500
+        border-amber-300/20
+        shadow-amber-500/20
+      `,
     },
     {
       key: "completed",
       label: "Completed",
-      icon: "✓",
-      accent: "violet",
+      icon: "✅",
+      accent: `
+        from-emerald-500
+        via-green-500
+        to-lime-500
+        border-emerald-300/20
+        shadow-emerald-500/20
+      `,
+    },
+    {
+      key: "high-priority",
+      label: "High Priority",
+      icon: "🔥",
+      accent: `
+        from-rose-500
+        via-red-500
+        to-orange-500
+        border-rose-300/20
+        shadow-rose-500/20
+      `,
     },
   ];
-
-  const activeStyles = {
-    blue: `
-      from-blue-600
-      via-blue-500
-      to-indigo-600
-      border-blue-300/20
-      shadow-blue-500/20
-    `,
-    amber: `
-      from-amber-500
-      via-orange-500
-      to-yellow-500
-      border-amber-300/20
-      shadow-amber-500/20
-    `,
-    violet: `
-      from-violet-600
-      via-purple-500
-      to-fuchsia-600
-      border-violet-300/20
-      shadow-violet-500/20
-    `,
-  };
 
   return (
     <div
@@ -52,21 +61,22 @@ export default function TodoFilter({ currentFilter, onFilterChange }) {
         relative
         overflow-hidden
         rounded-3xl
-        border border-blue-400/10
+        border border-white/10
         bg-gradient-to-br
-        from-slate-950
-        via-blue-950
-        to-slate-900
-        p-3
+        from-zinc-950
+        via-neutral-900
+        to-stone-950
+        p-4
         shadow-2xl
         backdrop-blur-2xl
       "
     >
       {/* Ambient Glow */}
-      <div className="absolute -top-10 -left-10 h-32 w-32 rounded-full bg-blue-500/10 blur-3xl animate-pulse"></div>
-      <div className="absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-violet-500/10 blur-3xl animate-pulse"></div>
+      <div className="absolute -top-12 -left-12 h-36 w-36 rounded-full bg-amber-500/10 blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-rose-500/10 blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl"></div>
 
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
         {filters.map((filter) => {
           const isActive = currentFilter === filter.key;
 
@@ -88,18 +98,18 @@ export default function TodoFilter({ currentFilter, onFilterChange }) {
                   isActive
                     ? `
                       bg-gradient-to-r
-                      ${activeStyles[filter.accent]}
+                      ${filter.accent}
                       text-white
                       shadow-2xl
                       scale-[1.03]
                     `
                     : `
-                      bg-white/5
-                      border-blue-400/10
-                      text-blue-100/60
+                      bg-white/10
+                      border-white/10
+                      text-zinc-300
                       hover:text-white
                       hover:border-amber-400/20
-                      hover:bg-white/10
+                      hover:bg-white/20
                       hover:scale-[1.02]
                     `
                 }
