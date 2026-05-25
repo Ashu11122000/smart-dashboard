@@ -18,6 +18,7 @@ import {
   UserCircleIcon,
   ChartBarIcon,
   SparklesIcon,
+  FireIcon,
 } from "@heroicons/react/24/outline";
 
 import { ToastContainer } from "react-toastify";
@@ -27,105 +28,98 @@ export default function App() {
   const modules = [
     {
       title: "Counter Analytics",
-      description:
-        "Interactive intelligent counter with precision controls, visual progress intelligence, and premium keyboard interactions.",
+      subtitle: "Interactive productivity intelligence with elegant controls.",
       badge: "Analytics",
-      icon: <ChartBarIcon className="w-5 h-5" />,
+      icon: <ChartBarIcon className="h-6 w-6" />,
       component: <Counter />,
       accent: {
+        glow: "from-emerald-500/20 via-lime-500/10 to-transparent",
         badge:
           "border-emerald-400/20 bg-emerald-500/10 text-emerald-300",
-        glow: "from-emerald-500/20 to-lime-500/10",
         title:
           "from-emerald-300 via-lime-300 to-yellow-300",
       },
     },
     {
       title: "User Management",
-      description:
-        "Elegant profile workflows with premium identity management and immersive interaction design.",
+      subtitle: "Identity workflows with polished premium interactions.",
       badge: "Identity",
-      icon: <UserCircleIcon className="w-5 h-5" />,
+      icon: <UserCircleIcon className="h-6 w-6" />,
       component: <UserForm />,
       accent: {
+        glow: "from-rose-500/20 via-pink-500/10 to-transparent",
         badge:
           "border-rose-400/20 bg-rose-500/10 text-rose-300",
-        glow: "from-rose-500/20 to-pink-500/10",
         title:
           "from-rose-300 via-pink-300 to-orange-300",
       },
     },
     {
       title: "Task Management",
-      description:
-        "Ultra-premium productivity workspace with advanced task organization and momentum-driven interactions.",
+      subtitle: "Momentum-driven productivity workspace experience.",
       badge: "Productivity",
-      icon: <ClipboardDocumentListIcon className="w-5 h-5" />,
+      icon: <ClipboardDocumentListIcon className="h-6 w-6" />,
       component: <TodoList />,
       accent: {
+        glow: "from-amber-500/20 via-orange-500/10 to-transparent",
         badge:
           "border-amber-400/20 bg-amber-500/10 text-amber-300",
-        glow: "from-amber-500/20 to-orange-500/10",
         title:
           "from-amber-300 via-orange-300 to-yellow-300",
       },
     },
     {
       title: "AI Search",
-      description:
-        "Premium debounced intelligent search experience with responsive modern discovery interactions.",
+      subtitle: "Fast premium discovery interactions with modern UX.",
       badge: "Discovery",
-      icon: <MagnifyingGlassIcon className="w-5 h-5" />,
+      icon: <MagnifyingGlassIcon className="h-6 w-6" />,
       component: <DebouncedSearch />,
       accent: {
+        glow: "from-fuchsia-500/20 via-pink-500/10 to-transparent",
         badge:
           "border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-300",
-        glow: "from-fuchsia-500/20 to-pink-500/10",
         title:
           "from-fuchsia-300 via-pink-300 to-rose-300",
       },
     },
     {
       title: "Smart Calculator",
-      description:
-        "Advanced computational intelligence with premium memory tools, history tracking, and modern interaction layers.",
+      subtitle: "Modern computational intelligence with luxury interactions.",
       badge: "Compute",
-      icon: <CalculatorIcon className="w-5 h-5" />,
+      icon: <CalculatorIcon className="h-6 w-6" />,
       component: <Calculator />,
       accent: {
+        glow: "from-violet-500/20 via-purple-500/10 to-transparent",
         badge:
           "border-violet-400/20 bg-violet-500/10 text-violet-300",
-        glow: "from-violet-500/20 to-purple-500/10",
         title:
           "from-violet-300 via-purple-300 to-fuchsia-300",
       },
     },
     {
       title: "Weather Intelligence",
-      description:
-        "Immersive atmospheric intelligence delivering premium climate insights, analytics, and elegant forecasting.",
+      subtitle: "Immersive atmospheric insights with advanced climate analytics.",
       badge: "Climate",
-      icon: <CloudIcon className="w-5 h-5" />,
+      icon: <CloudIcon className="h-6 w-6" />,
       component: <Weather />,
       accent: {
+        glow: "from-cyan-500/20 via-teal-500/10 to-transparent",
         badge:
           "border-cyan-400/20 bg-cyan-500/10 text-cyan-300",
-        glow: "from-cyan-500/20 to-teal-500/10",
         title:
           "from-cyan-300 via-teal-300 to-emerald-300",
       },
     },
     {
       title: "Notes Workspace",
-      description:
-        "Beautiful premium idea management system for capturing thoughts, concepts, workflows, and structured creativity.",
+      subtitle: "Capture ideas in a beautifully immersive premium environment.",
       badge: "Creative",
-      icon: <PencilSquareIcon className="w-5 h-5" />,
+      icon: <PencilSquareIcon className="h-6 w-6" />,
       component: <NoteApp />,
       accent: {
+        glow: "from-orange-500/20 via-red-500/10 to-transparent",
         badge:
           "border-orange-400/20 bg-orange-500/10 text-orange-300",
-        glow: "from-orange-500/20 to-red-500/10",
         title:
           "from-orange-300 via-red-300 to-rose-300",
       },
@@ -133,163 +127,158 @@ export default function App() {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050505] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
       {/* Ultra Premium Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,114,182,0.08),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(251,191,36,0.08),transparent_35%),radial-gradient(circle_at_center,rgba(16,185,129,0.05),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,114,182,0.08),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(251,191,36,0.08),transparent_30%),radial-gradient(circle_at_center,rgba(16,185,129,0.05),transparent_45%)]" />
 
-        <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-rose-500/10 blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 h-[30rem] w-[30rem] rounded-full bg-amber-500/10 blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
+        <div className="absolute top-20 left-10 h-[32rem] w-[32rem] rounded-full bg-rose-500/10 blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 h-[34rem] w-[34rem] rounded-full bg-amber-500/10 blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
       </div>
 
       <Navbar />
 
-      <main className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-10 md:py-14">
 
         {/* Hero Section */}
-        <section className="mb-20">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 md:p-12 lg:p-16 backdrop-blur-3xl shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+        <section className="mb-16 md:mb-24">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.04] p-8 md:p-12 lg:p-16 backdrop-blur-3xl shadow-[0_30px_100px_rgba(0,0,0,0.6)]">
 
-            <div className="absolute -top-20 right-0 h-96 w-96 rounded-full bg-rose-500/10 blur-3xl" />
-            <div className="absolute -bottom-20 left-0 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl" />
-            <div className="absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
+            <div className="absolute -top-20 right-0 h-[28rem] w-[28rem] rounded-full bg-rose-500/10 blur-3xl" />
+            <div className="absolute -bottom-20 left-0 h-[28rem] w-[28rem] rounded-full bg-amber-500/10 blur-3xl" />
 
-            <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
-
-              <div>
-                <p className="inline-flex items-center gap-3 rounded-full border border-rose-400/20 bg-rose-500/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.35em] text-rose-300 backdrop-blur-xl">
-                  <SparklesIcon className="h-4 w-4" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-3 rounded-full border border-rose-400/20 bg-rose-500/10 px-5 py-2 backdrop-blur-xl">
+                <SparklesIcon className="h-4 w-4 text-rose-300" />
+                <span className="text-xs font-bold uppercase tracking-[0.35em] text-rose-300">
                   Ultra Premium Dashboard Suite
-                </p>
-
-                <h1 className="mt-8 text-5xl md:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tight">
-                  <span className="block text-white">Future-Grade</span>
-                  <span className="block bg-gradient-to-r from-rose-300 via-amber-300 to-emerald-300 bg-clip-text text-transparent">
-                    Dashboard Experience
-                  </span>
-                </h1>
-
-                <p className="mt-8 max-w-3xl text-lg md:text-xl text-zinc-300 leading-relaxed">
-                  A cinematic productivity ecosystem combining premium utilities,
-                  smart analytics, atmospheric intelligence, creative workflows,
-                  and ultra-modern interaction systems.
-                </p>
-
-                <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { label: "Modules", value: "7+" },
-                    { label: "Premium UX", value: "100%" },
-                    { label: "Interactions", value: "Advanced" },
-                    { label: "Visual Quality", value: "Ultra" },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="rounded-2xl border border-white/10 bg-black/20 p-5 backdrop-blur-xl"
-                    >
-                      <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
-                        {item.label}
-                      </p>
-
-                      <p className="mt-3 text-xl font-black text-white">
-                        {item.value}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                </span>
               </div>
 
-              {/* Right Hero Visual */}
-              <div className="relative hidden lg:block">
-                <div className="grid grid-cols-2 gap-5">
-                  {modules.slice(0, 4).map((module, index) => (
-                    <div
-                      key={index}
-                      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-2xl shadow-2xl hover:-translate-y-2 transition-all duration-500"
-                    >
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${module.accent.glow} opacity-40`}
-                      />
+              <h1 className="mt-8 text-5xl md:text-7xl xl:text-8xl font-black leading-[0.95]">
+                <span className="block text-white">
+                  Luxury Dashboard
+                </span>
 
-                      <div className="relative z-10">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-black/30 border border-white/10 text-white shadow-xl">
-                          {module.icon}
-                        </div>
+                <span className="block bg-gradient-to-r from-rose-300 via-amber-300 to-emerald-300 bg-clip-text text-transparent">
+                  Experience
+                </span>
+              </h1>
 
-                        <h3 className="mt-5 text-lg font-bold text-white">
-                          {module.title}
-                        </h3>
+              <p className="mt-8 max-w-4xl text-lg md:text-xl text-zinc-300 leading-relaxed">
+                A cinematic full-stack dashboard experience combining premium
+                utilities, productivity systems, intelligent analytics, immersive
+                weather intelligence, modern discovery workflows, and creative
+                workspace tools.
+              </p>
 
-                        <p className="mt-2 text-sm text-zinc-400">
-                          {module.badge}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <div className="mt-10 flex flex-wrap gap-4">
+                {[
+                  "7 Premium Modules",
+                  "Luxury Interactions",
+                  "Modern UI System",
+                  "Advanced Dashboard UX",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 backdrop-blur-xl"
+                  >
+                    <span className="text-sm font-semibold text-zinc-200">
+                      {item}
+                    </span>
+                  </div>
+                ))}
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* Modules Grid */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {modules.map((module, index) => {
-              const words = module.title.split(" ");
-              const firstWord = words[0];
-              const rest = words.slice(1).join(" ");
+        {/* Vertical Premium Module Stack */}
+        <section className="space-y-14 md:space-y-20">
+          {modules.map((module, index) => (
+            <div key={index} className="group">
+              <Card className="!bg-transparent !border-white/10 !p-0 overflow-hidden">
 
-              return (
-                <div
-                  key={index}
-                  className="group transition-all duration-700 hover:-translate-y-4"
-                >
-                  <Card className="!bg-transparent !border-white/10">
-                    {/* Module Header */}
-                    <div className="mb-8">
-                      <div className="flex items-start gap-5">
+                {/* Module Header */}
+                <div className="relative overflow-hidden border-b border-white/10 bg-white/[0.03] px-6 py-8 md:px-10 md:py-10 backdrop-blur-2xl">
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${module.accent.glow}`}
+                  />
 
-                        <div className="relative shrink-0">
-                          <div
-                            className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${module.accent.glow} blur-xl`}
-                          />
+                  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
 
-                          <div className="relative flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-black/40 shadow-2xl backdrop-blur-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                            {module.icon}
-                          </div>
+                    {/* Left */}
+                    <div className="flex items-start gap-5">
+                      <div className="relative shrink-0">
+                        <div
+                          className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${module.accent.glow} blur-xl`}
+                        />
+
+                        <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl border border-white/10 bg-black/40 shadow-2xl backdrop-blur-xl">
+                          {module.icon}
                         </div>
+                      </div>
 
-                        <div className="flex-1">
+                      <div>
+                        <span
+                          className={`inline-flex rounded-full border px-4 py-2 text-[10px] uppercase tracking-[0.35em] font-bold ${module.accent.badge}`}
+                        >
+                          ✦ {module.badge}
+                        </span>
+
+                        <h2 className="mt-5 text-4xl md:text-5xl font-black leading-tight">
+                          <span className="text-white">
+                            {module.title.split(" ")[0]}
+                          </span>{" "}
                           <span
-                            className={`inline-flex rounded-full border px-4 py-1.5 text-[10px] uppercase tracking-[0.35em] font-bold backdrop-blur-xl ${module.accent.badge}`}
+                            className={`bg-gradient-to-r ${module.accent.title} bg-clip-text text-transparent`}
                           >
-                            ✦ {module.badge}
+                            {module.title.split(" ").slice(1).join(" ")}
                           </span>
+                        </h2>
 
-                          <h2 className="mt-5 text-3xl md:text-4xl font-black leading-tight">
-                            <span className="text-white">{firstWord}</span>{" "}
-                            <span
-                              className={`bg-gradient-to-r ${module.accent.title} bg-clip-text text-transparent`}
-                            >
-                              {rest}
-                            </span>
-                          </h2>
-
-                          <p className="mt-4 text-sm md:text-base text-zinc-400 leading-relaxed">
-                            {module.description}
-                          </p>
-                        </div>
+                        <p className="mt-4 max-w-3xl text-base md:text-lg text-zinc-400 leading-relaxed">
+                          {module.subtitle}
+                        </p>
                       </div>
                     </div>
 
-                    {module.component}
-                  </Card>
+                    {/* Right Status */}
+                    <div className="flex flex-wrap gap-4">
+                      <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 backdrop-blur-xl">
+                        <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                          Module
+                        </p>
+                        <p className="mt-2 font-bold text-white">
+                          Ready
+                        </p>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 backdrop-blur-xl">
+                        <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                          Experience
+                        </p>
+                        <p className="mt-2 font-bold text-amber-300">
+                          Premium
+                        </p>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 backdrop-blur-xl">
+                        <FireIcon className="h-6 w-6 text-rose-300" />
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Module Content */}
+                <div className="p-6 md:p-10">
+                  {module.component}
+                </div>
+              </Card>
+            </div>
+          ))}
         </section>
       </main>
 

@@ -22,7 +22,9 @@ function getMotivation(hour) {
 
 export default function Navbar() {
   const [time, setTime] = useState(new Date());
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(
+    typeof navigator !== "undefined" ? navigator.onLine : true
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -65,146 +67,133 @@ export default function Navbar() {
   const motivation = getMotivation(currentHour);
   const isNight = currentHour >= 18 || currentHour < 6;
 
+  const statusCards = [
+    {
+      label: "System",
+      value: isOnline ? "Online" : "Offline",
+      icon: <FaWifi />,
+      color: isOnline ? "text-emerald-300" : "text-rose-300",
+      dot: isOnline ? "bg-emerald-400" : "bg-rose-400",
+    },
+    {
+      label: "Performance",
+      value: "Optimized",
+      icon: <FaBolt />,
+      color: "text-amber-300",
+      dot: "bg-amber-400",
+    },
+    {
+      label: "Workspace",
+      value: "Productive",
+      icon: <FaRocket />,
+      color: "text-rose-300",
+      dot: "bg-rose-400",
+    },
+  ];
+
   return (
-    <nav className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-zinc-950/85 backdrop-blur-2xl shadow-2xl">
+    <nav className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/85 backdrop-blur-3xl shadow-2xl">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-rose-500/5 to-emerald-500/5" />
+      <div className="absolute -top-10 left-10 h-48 w-48 rounded-full bg-amber-500/10 blur-3xl" />
+      <div className="absolute top-0 right-10 h-48 w-48 rounded-full bg-rose-500/10 blur-3xl" />
 
-      {/* Premium Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-rose-500/5 to-emerald-500/5 animate-pulse"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div className="space-y-6">
+          {/* Top Row */}
+          <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
+            {/* Brand */}
+            <div className="flex items-center gap-5">
+              <div className="relative group">
+                <div className="absolute inset-0 rounded-3xl bg-amber-500/20 blur-xl group-hover:blur-2xl transition-all duration-500" />
 
-      {/* Ambient Glow */}
-      <div className="absolute -top-12 left-16 h-40 w-40 rounded-full bg-amber-500/10 blur-3xl"></div>
-      <div className="absolute top-0 right-20 h-40 w-40 rounded-full bg-rose-500/10 blur-3xl"></div>
-      <div className="absolute bottom-0 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-emerald-500/5 blur-3xl"></div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex flex-col xl:flex-row items-center justify-between gap-5">
-
-          {/* Brand */}
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-3xl bg-amber-500/20 blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-
-              <div className="relative flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-xl transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
-                <FaTachometerAlt
-                  size={28}
-                  className="text-amber-300 transition-all duration-700 group-hover:rotate-180"
-                />
-              </div>
-            </div>
-
-            <div>
-              <h1 className="text-2xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-white via-amber-200 to-rose-300 bg-clip-text text-transparent">
-                Smart Dashboard
-              </h1>
-
-              <p className="mt-1 text-sm text-zinc-400 tracking-wide">
-                Ultra Premium React Learning Workspace
-              </p>
-            </div>
-          </div>
-
-          {/* Center Insights */}
-          <div className="hidden lg:flex items-center gap-4">
-
-            {/* System Status */}
-            <div className="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <div
-                  className={`h-3 w-3 rounded-full animate-pulse ${
-                    isOnline
-                      ? "bg-emerald-400"
-                      : "bg-rose-400"
-                  }`}
-                />
-
-                <FaWifi
-                  className={
-                    isOnline
-                      ? "text-emerald-300"
-                      : "text-rose-300"
-                  }
-                />
-
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    System
-                  </p>
-
-                  <p className="text-sm font-semibold text-white">
-                    {isOnline ? "Online" : "Offline"}
-                  </p>
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-xl transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+                  <FaTachometerAlt
+                    size={28}
+                    className="text-amber-300 transition-all duration-700 group-hover:rotate-180"
+                  />
                 </div>
               </div>
-            </div>
 
-            {/* Performance */}
-            <div className="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <FaBolt className="text-yellow-300" />
+              <div>
+                <h1 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-white via-amber-200 to-rose-300 bg-clip-text text-transparent">
+                  Smart Dashboard
+                </h1>
 
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Performance
-                  </p>
-
-                  <p className="text-sm font-semibold text-white">
-                    Optimized
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Productivity */}
-            <div className="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <FaRocket className="text-rose-300" />
-
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Workspace
-                  </p>
-
-                  <p className="text-sm font-semibold text-white">
-                    Productive
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right */}
-          <div className="flex flex-col md:flex-row items-center gap-4">
-
-            {/* Greeting */}
-            <div className="rounded-3xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-xl shadow-xl min-w-[240px]">
-              <div className="flex items-center justify-center gap-3">
-                {isNight ? (
-                  <FaMoon className="text-fuchsia-300" />
-                ) : (
-                  <FaSun className="text-amber-300" />
-                )}
-
-                <div className="text-center">
-                  <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
-                    {greeting}
-                  </p>
-
-                  <p className="text-sm font-semibold text-white mt-1">
-                    {motivation}
-                  </p>
-                </div>
+                <p className="mt-2 text-sm md:text-base text-zinc-400">
+                  Ultra Premium React Learning Workspace
+                </p>
               </div>
             </div>
 
             {/* Time */}
-            <div className="rounded-3xl border border-white/10 bg-white/10 px-6 py-4 backdrop-blur-xl shadow-xl text-center min-w-[240px]">
-              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                {formattedDate}
-              </p>
+            <div className="w-full xl:w-auto">
+              <div className="rounded-3xl border border-white/10 bg-white/10 px-6 py-5 backdrop-blur-xl shadow-xl text-center">
+                <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                  {formattedDate}
+                </p>
 
-              <p className="mt-2 text-2xl font-black text-amber-300 tracking-wider">
-                {formattedTime}
-              </p>
+                <p className="mt-3 text-3xl md:text-4xl font-black text-amber-300 tracking-wider">
+                  {formattedTime}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {/* Status Cards */}
+            {statusCards.map((card) => (
+              <div
+                key={card.label}
+                className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl shadow-xl hover:scale-[1.02] transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`h-12 w-12 rounded-2xl border border-white/10 bg-black/20 flex items-center justify-center text-xl ${card.color}`}
+                  >
+                    {card.icon}
+                  </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      {card.label}
+                    </p>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      <div
+                        className={`h-2.5 w-2.5 rounded-full animate-pulse ${card.dot}`}
+                      />
+                      <p className="font-semibold text-white">
+                        {card.value}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Greeting */}
+            <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black/20">
+                  {isNight ? (
+                    <FaMoon className="text-fuchsia-300 text-xl" />
+                  ) : (
+                    <FaSun className="text-amber-300 text-xl" />
+                  )}
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    {greeting}
+                  </p>
+
+                  <p className="mt-2 text-white font-semibold leading-relaxed">
+                    {motivation}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
